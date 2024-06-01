@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://dicuapfgkvy6m"]
+
+[ext_resource type="PackedScene" uid="uid://by7b4rv4xfj8m" path="res://Interface.tscn" id="1_lidso"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_wmoej"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6uupr"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_d1c81"]
+sky_material = SubResource("ProceduralSkyMaterial_6uupr")
+
+[sub_resource type="Environment" id="Environment_sex3u"]
+background_color = Color(0.0941176, 0.0980392, 0.14902, 1)
+background_energy_multiplier = 0.0
+sky = SubResource("Sky_d1c81")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Main" type="Node3D"]
+
+[node name="Interface" parent="." instance=ExtResource("1_lidso")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CylinderMesh_wmoej")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 2)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_sex3u")
