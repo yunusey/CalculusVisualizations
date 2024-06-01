@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dicuapfgkvy6m"]
+[gd_scene load_steps=9 format=3 uid="uid://dicuapfgkvy6m"]
 
+[ext_resource type="Script" path="res://Main.gd" id="1_7p7it"]
 [ext_resource type="PackedScene" uid="uid://by7b4rv4xfj8m" path="res://Interface.tscn" id="1_lidso"]
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_wmoej"]
+[ext_resource type="PackedScene" uid="uid://clngfumdb0vsj" path="res://GimbalCamera/GimbalCamera.tscn" id="3_v6r80"]
+[ext_resource type="PackedScene" uid="uid://kl7pssnx6ujy" path="res://Axes/Axes.tscn" id="4_af5wu"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6uupr"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -17,18 +18,24 @@ sky = SubResource("Sky_d1c81")
 tonemap_mode = 2
 glow_enabled = true
 
+[sub_resource type="BoxMesh" id="BoxMesh_msfrv"]
+subdivide_depth = 40
+
 [node name="Main" type="Node3D"]
+script = ExtResource("1_7p7it")
 
 [node name="Interface" parent="." instance=ExtResource("1_lidso")]
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+[node name="GimbalCamera" parent="." instance=ExtResource("3_v6r80")]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("CylinderMesh_wmoej")
-
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 2)
+[node name="Axes" parent="." instance=ExtResource("4_af5wu")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_sex3u")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 2)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.5, -0.5)
+mesh = SubResource("BoxMesh_msfrv")

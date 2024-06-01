@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=3 uid="uid://kl7pssnx6ujy"]
+
+[ext_resource type="PackedScene" uid="uid://clelm7ktkqljl" path="res://Axes/Axis.tscn" id="1_tqd23"]
+[ext_resource type="FontFile" uid="uid://bebsf5yy5ff1v" path="res://Assets/Latin Modern.otf" id="2_764kk"]
+
+[node name="Axes" type="Node3D"]
+
+[node name="X" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Axis" parent="X" instance=ExtResource("1_tqd23")]
+
+[node name="Label3D" type="Label3D" parent="X"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.5, 5.1, 0)
+outline_modulate = Color(1, 1, 1, 1)
+text = "x"
+font = ExtResource("2_764kk")
+font_size = 64
+outline_size = 0
+
+[node name="Y" type="Node3D" parent="."]
+
+[node name="Axis" parent="Y" instance=ExtResource("1_tqd23")]
+
+[node name="Label3D" type="Label3D" parent="Y"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 5.1, 0)
+outline_modulate = Color(1, 1, 1, 1)
+text = "y"
+font = ExtResource("2_764kk")
+font_size = 64
+outline_size = 0
+
+[node name="Z" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+
+[node name="Axis" parent="Z" instance=ExtResource("1_tqd23")]
+
+[node name="Label3D" type="Label3D" parent="Z"]
+transform = Transform3D(1, 8.74228e-08, -8.74228e-08, 8.74228e-08, 4.37114e-08, 1, 8.74228e-08, -1, 4.37114e-08, 0, 5.1, -0.5)
+outline_modulate = Color(1, 1, 1, 1)
+text = "z"
+font = ExtResource("2_764kk")
+font_size = 64
+outline_size = 0
