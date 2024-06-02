@@ -1,0 +1,117 @@
+[gd_scene load_steps=6 format=3 uid="uid://by7b4rv4xfj8m"]
+
+[ext_resource type="FontFile" uid="uid://dgfsq6i8mn4kl" path="res://Assets/Vollkorn-VariableFont_wght.ttf" id="1_0s4fo"]
+[ext_resource type="Script" path="res://Interface/Interface.gd" id="1_42uwa"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4eipt"]
+content_margin_top = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0, 0.650996, 0.555928, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j6y4i"]
+content_margin_top = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.787534, 6.50728e-05, 3.41728e-05, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_81xuu"]
+content_margin_top = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 0.477854, 0.410057, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[node name="Interface" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_42uwa")
+
+[node name="ParamContainer" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -459.0
+offset_bottom = 118.0
+grow_horizontal = 0
+theme_override_constants/h_separation = 10
+columns = 2
+
+[node name="Label" type="Label" parent="ParamContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.709804, 0.741176, 0.992157, 1)
+theme_override_fonts/font = ExtResource("1_0s4fo")
+theme_override_font_sizes/font_size = 40
+text = "# Rectangles:"
+horizontal_alignment = 2
+
+[node name="NumRect" type="HSlider" parent="ParamContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+theme_override_constants/center_grabber = 0
+theme_override_styles/slider = SubResource("StyleBoxFlat_4eipt")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_j6y4i")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_81xuu")
+min_value = 1.0
+max_value = 50.0
+value = 5.0
+
+[node name="Label2" type="Label" parent="ParamContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.709804, 0.741176, 0.992157, 1)
+theme_override_fonts/font = ExtResource("1_0s4fo")
+theme_override_font_sizes/font_size = 40
+text = "Disk Rotation:"
+horizontal_alignment = 2
+
+[node name="DiskRotation" type="HSlider" parent="ParamContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+theme_override_constants/center_grabber = 0
+theme_override_styles/slider = SubResource("StyleBoxFlat_4eipt")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_j6y4i")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_81xuu")
+max_value = 6.283
+step = 0.1
+
+[node name="Label3" type="Label" parent="ParamContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.709804, 0.741176, 0.992157, 1)
+theme_override_fonts/font = ExtResource("1_0s4fo")
+theme_override_font_sizes/font_size = 40
+text = "Disk Transp.:"
+horizontal_alignment = 2
+
+[node name="DiskTrans" type="HSlider" parent="ParamContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+theme_override_constants/center_grabber = 0
+theme_override_styles/slider = SubResource("StyleBoxFlat_4eipt")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_j6y4i")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_81xuu")
+max_value = 1.0
+step = 0.05
+value = 0.2
+
+[connection signal="value_changed" from="ParamContainer/NumRect" to="." method="_on_num_rect_value_changed"]
+[connection signal="value_changed" from="ParamContainer/DiskRotation" to="." method="_on_disk_rotation_value_changed"]
+[connection signal="value_changed" from="ParamContainer/DiskTrans" to="." method="_on_disk_trans_value_changed"]

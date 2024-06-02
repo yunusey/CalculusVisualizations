@@ -9,3 +9,6 @@ script = ExtResource("1_baiqg")
 
 [node name="Camera3D" type="Camera3D" parent="InnerAxis"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 4)

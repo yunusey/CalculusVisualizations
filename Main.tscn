@@ -1,9 +1,12 @@
 [gd_scene load_steps=9 format=3 uid="uid://dicuapfgkvy6m"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_7p7it"]
-[ext_resource type="PackedScene" uid="uid://by7b4rv4xfj8m" path="res://Interface.tscn" id="1_lidso"]
+[ext_resource type="PackedScene" uid="uid://by7b4rv4xfj8m" path="res://Interface/Interface.tscn" id="1_lidso"]
 [ext_resource type="PackedScene" uid="uid://clngfumdb0vsj" path="res://GimbalCamera/GimbalCamera.tscn" id="3_v6r80"]
 [ext_resource type="PackedScene" uid="uid://kl7pssnx6ujy" path="res://Axes/Axes.tscn" id="4_af5wu"]
+
+[sub_resource type="Gradient" id="Gradient_j13tt"]
+colors = PackedColorArray(0.603922, 0.447059, 0.67451, 1, 1, 0.52549, 0.184314, 1)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6uupr"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -18,15 +21,15 @@ sky = SubResource("Sky_d1c81")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="BoxMesh" id="BoxMesh_msfrv"]
-subdivide_depth = 40
-
 [node name="Main" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 0)
 script = ExtResource("1_7p7it")
+gradient = SubResource("Gradient_j13tt")
 
 [node name="Interface" parent="." instance=ExtResource("1_lidso")]
 
 [node name="GimbalCamera" parent="." instance=ExtResource("3_v6r80")]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 0, 0)
 
 [node name="Axes" parent="." instance=ExtResource("4_af5wu")]
 
@@ -34,8 +37,11 @@ script = ExtResource("1_7p7it")
 environment = SubResource("Environment_sex3u")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+light_energy = 0.205
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.5, -0.5)
-mesh = SubResource("BoxMesh_msfrv")
+[node name="Rectangles" type="Node3D" parent="."]
+
+[connection signal="disk_rotation_changed" from="Interface" to="." method="_on_interface_disk_rotation_changed"]
+[connection signal="disk_trans_changed" from="Interface" to="." method="_on_interface_disk_trans_changed"]
+[connection signal="num_rect_changed" from="Interface" to="." method="_on_interface_num_rect_changed"]

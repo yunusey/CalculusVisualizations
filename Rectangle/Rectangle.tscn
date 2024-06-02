@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://duqaqcpln78so"]
+
+[ext_resource type="Script" path="res://Rectangle/Rectangle.gd" id="1_3ljti"]
+
+[sub_resource type="Shader" id="Shader_6d52n"]
+resource_local_to_scene = true
+code = "shader_type spatial;
+
+uniform float alpha = 0.6;
+uniform vec3 color: source_color = vec3(0.8, 0.8, 0.8);
+
+void fragment() {
+	ALPHA = alpha;
+	ALBEDO = color;
+}
+
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hxgft"]
+resource_local_to_scene = true
+render_priority = 0
+shader = SubResource("Shader_6d52n")
+shader_parameter/alpha = 0.6
+shader_parameter/color = Color(0, 0.672355, 0.705361, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_r0xva"]
+resource_local_to_scene = true
+material = SubResource("ShaderMaterial_hxgft")
+
+[node name="Rectangle" type="Node3D"]
+script = ExtResource("1_3ljti")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_r0xva")
