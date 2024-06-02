@@ -57,7 +57,7 @@ func update_rects(value: int) -> void:
 		$Rectangles.get_child(i).queue_free()
 	
 	@warning_ignore("integer_division")
-	var disk_rect_index = $Rectangles.get_child_count() / 2
+	var disk_rect_index = value / 2
 	var disk = $Rectangles.get_child(disk_rect_index)
 
 	var disk_rotation = $CanvasLayer/Interface.get_disk_rotation()
