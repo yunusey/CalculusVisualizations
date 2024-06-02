@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://by7b4rv4xfj8m"]
+[gd_scene load_steps=14 format=3 uid="uid://by7b4rv4xfj8m"]
 
 [ext_resource type="FontFile" uid="uid://dgfsq6i8mn4kl" path="res://Assets/Vollkorn-VariableFont_wght.ttf" id="1_0s4fo"]
 [ext_resource type="Script" path="res://Interface/Interface.gd" id="1_42uwa"]
+[ext_resource type="FontFile" uid="uid://x71umklla4od" path="res://Assets/Vollkorn-Italic-VariableFont_wght.ttf" id="3_h75xf"]
+[ext_resource type="FontFile" uid="uid://bebsf5yy5ff1v" path="res://Assets/Latin Modern.otf" id="4_8q2bs"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4eipt"]
 content_margin_top = 4.0
@@ -30,6 +32,34 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
+[sub_resource type="Theme" id="Theme_tcyxa"]
+default_font = ExtResource("3_h75xf")
+default_font_size = 32
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g01dm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2tu4g"]
+bg_color = Color(0.622705, 0.0064463, 0.403124, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gi74e"]
+bg_color = Color(0, 0.26322, 0.299531, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r77ep"]
+
+[sub_resource type="Theme" id="Theme_wyjx7"]
+default_font = ExtResource("4_8q2bs")
+default_font_size = 32
+LineEdit/styles/focus = SubResource("StyleBoxEmpty_r77ep")
+LineEdit/styles/normal = SubResource("StyleBoxFlat_gi74e")
+
 [node name="Interface" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -44,8 +74,9 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -459.0
-offset_bottom = 118.0
+offset_left = -470.0
+offset_right = -11.0
+offset_bottom = 240.0
 grow_horizontal = 0
 theme_override_constants/h_separation = 10
 columns = 2
@@ -68,7 +99,6 @@ theme_override_styles/slider = SubResource("StyleBoxFlat_4eipt")
 theme_override_styles/grabber_area = SubResource("StyleBoxFlat_j6y4i")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_81xuu")
 min_value = 1.0
-max_value = 50.0
 value = 5.0
 
 [node name="Label2" type="Label" parent="ParamContainer"]
@@ -112,6 +142,92 @@ max_value = 1.0
 step = 0.05
 value = 0.2
 
+[node name="Label4" type="Label" parent="ParamContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.709804, 0.741176, 0.992157, 1)
+theme_override_fonts/font = ExtResource("1_0s4fo")
+theme_override_font_sizes/font_size = 40
+text = "Coloring:"
+horizontal_alignment = 2
+
+[node name="OptionButton" type="OptionButton" parent="ParamContainer"]
+layout_mode = 2
+focus_mode = 0
+theme = SubResource("Theme_tcyxa")
+theme_override_fonts/font = ExtResource("3_h75xf")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/focus = SubResource("StyleBoxEmpty_g01dm")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2tu4g")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_2tu4g")
+theme_override_styles/normal = SubResource("StyleBoxFlat_gi74e")
+alignment = 1
+selected = 0
+item_count = 2
+popup/item_0/text = "Gradient"
+popup/item_1/text = "Distinct"
+popup/item_1/id = 1
+
+[node name="Label5" type="Label" parent="ParamContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.709804, 0.741176, 0.992157, 1)
+theme_override_fonts/font = ExtResource("4_8q2bs")
+theme_override_font_sizes/font_size = 40
+text = "f(x) = "
+horizontal_alignment = 2
+
+[node name="FunctionEdit" type="LineEdit" parent="ParamContainer"]
+layout_mode = 2
+focus_mode = 1
+theme_override_fonts/font = ExtResource("4_8q2bs")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/focus = SubResource("StyleBoxEmpty_g01dm")
+theme_override_styles/normal = SubResource("StyleBoxFlat_gi74e")
+text = "-(x - 3) * (x+3) / 3"
+expand_to_text_length = true
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+
+[node name="Label6" type="Label" parent="ParamContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.709804, 0.741176, 0.992157, 1)
+theme_override_fonts/font = ExtResource("4_8q2bs")
+theme_override_font_sizes/font_size = 40
+text = "a = "
+horizontal_alignment = 2
+
+[node name="DomainMin" type="SpinBox" parent="ParamContainer"]
+layout_mode = 2
+theme = SubResource("Theme_wyjx7")
+min_value = -5.0
+max_value = 5.0
+step = 0.1
+page = 0.1
+alignment = 1
+update_on_text_changed = true
+
+[node name="Label7" type="Label" parent="ParamContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.709804, 0.741176, 0.992157, 1)
+theme_override_fonts/font = ExtResource("4_8q2bs")
+theme_override_font_sizes/font_size = 40
+text = "b = "
+horizontal_alignment = 2
+
+[node name="DomainMax" type="SpinBox" parent="ParamContainer"]
+layout_mode = 2
+theme = SubResource("Theme_wyjx7")
+min_value = -5.0
+max_value = 5.0
+step = 0.1
+page = 0.1
+value = 3.0
+alignment = 1
+update_on_text_changed = true
+
 [connection signal="value_changed" from="ParamContainer/NumRect" to="." method="_on_num_rect_value_changed"]
 [connection signal="value_changed" from="ParamContainer/DiskRotation" to="." method="_on_disk_rotation_value_changed"]
 [connection signal="value_changed" from="ParamContainer/DiskTrans" to="." method="_on_disk_trans_value_changed"]
+[connection signal="item_selected" from="ParamContainer/OptionButton" to="." method="_on_option_button_item_selected"]
+[connection signal="text_changed" from="ParamContainer/FunctionEdit" to="." method="_on_function_edit_text_changed"]
+[connection signal="value_changed" from="ParamContainer/DomainMin" to="." method="_on_domain_min_value_changed"]
+[connection signal="value_changed" from="ParamContainer/DomainMax" to="." method="_on_domain_max_value_changed"]

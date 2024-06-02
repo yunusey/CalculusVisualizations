@@ -8,3 +8,7 @@ To test web, you can use:
 godot --path ./ --export-debug "Web" ./build/index.html
 python serve.py --root build/
 ```
+
+## Settings to Keep in Mind
+
+- `H`: toggles gui's visibility

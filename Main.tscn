@@ -22,11 +22,12 @@ tonemap_mode = 2
 glow_enabled = true
 
 [node name="Main" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 0)
 script = ExtResource("1_7p7it")
 gradient = SubResource("Gradient_j13tt")
 
-[node name="Interface" parent="." instance=ExtResource("1_lidso")]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Interface" parent="CanvasLayer" instance=ExtResource("1_lidso")]
 
 [node name="GimbalCamera" parent="." instance=ExtResource("3_v6r80")]
 transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 0, 0)
@@ -42,6 +43,9 @@ light_energy = 0.205
 
 [node name="Rectangles" type="Node3D" parent="."]
 
-[connection signal="disk_rotation_changed" from="Interface" to="." method="_on_interface_disk_rotation_changed"]
-[connection signal="disk_trans_changed" from="Interface" to="." method="_on_interface_disk_trans_changed"]
-[connection signal="num_rect_changed" from="Interface" to="." method="_on_interface_num_rect_changed"]
+[connection signal="coloring_changed" from="CanvasLayer/Interface" to="." method="_on_interface_coloring_changed"]
+[connection signal="disk_rotation_changed" from="CanvasLayer/Interface" to="." method="_on_interface_disk_rotation_changed"]
+[connection signal="disk_trans_changed" from="CanvasLayer/Interface" to="." method="_on_interface_disk_trans_changed"]
+[connection signal="domain_changed" from="CanvasLayer/Interface" to="." method="_on_interface_domain_changed"]
+[connection signal="function_changed" from="CanvasLayer/Interface" to="." method="_on_interface_function_changed"]
+[connection signal="num_rect_changed" from="CanvasLayer/Interface" to="." method="_on_interface_num_rect_changed"]
