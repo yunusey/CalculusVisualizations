@@ -183,6 +183,7 @@ theme_override_font_sizes/font_size = 32
 theme_override_styles/focus = SubResource("StyleBoxEmpty_g01dm")
 theme_override_styles/normal = SubResource("StyleBoxFlat_gi74e")
 text = "-(x - 3) * (x+3) / 3"
+alignment = 1
 expand_to_text_length = true
 shortcut_keys_enabled = false
 deselect_on_focus_loss_enabled = false
