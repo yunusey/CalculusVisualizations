@@ -3,6 +3,9 @@ extends Node3D
 ## Rotation speed for camera
 @export var rotation_speed = PI / 2
 
+func _ready() -> void:
+	self.scale = Vector3.ONE * 2.5
+
 func handle_rotation(delta):
 	var y_rotation = Input.get_axis("cam-move-left", "cam-move-right")
 	var x_rotation = Input.get_axis("cam-move-up", "cam-move-down")
