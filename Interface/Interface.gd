@@ -10,6 +10,7 @@ signal domain_changed(new_domain_min: float, new_domain_max: float)
 signal function_changed()
 
 func _ready() -> void:
+	$ParamContainer/OptionButton.select(0)
 	function = get_function()
 
 func _unhandled_input(event: InputEvent) -> void:
