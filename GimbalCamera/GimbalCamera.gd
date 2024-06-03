@@ -14,6 +14,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		self.scale -= Vector3.ONE * 0.01
 	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 		self.scale += Vector3.ONE * 0.01
+	
+	self.scale = clamp(self.scale, Vector3.ONE * 0.1, Vector3.ONE * 5)
 
 func _process(delta):
 	handle_rotation(delta)
