@@ -53,6 +53,8 @@ func set_rot(new_rotation: float) -> void:
 
 func reset() -> void:
 	## Reset the rectangle's mesh if it has been changed to ArrayMesh
+	material.set_shader_parameter("color", color)
+	material.set_shader_parameter("alpha", 0.5)
 	if $MeshInstance3D.mesh is ArrayMesh:
 		$MeshInstance3D.mesh = BoxMesh.new()
 		$MeshInstance3D.mesh.size = size

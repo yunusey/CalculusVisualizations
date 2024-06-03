@@ -59,9 +59,10 @@ func update_rects(value: int) -> void:
 	@warning_ignore("integer_division")
 	var disk_rect_index = value / 2
 	var disk = $Rectangles.get_child(disk_rect_index)
-
 	var disk_rotation = $CanvasLayer/Interface.get_disk_rotation()
 	disk.set_rot(disk_rotation)
+
+	disk.set_alpha(1. - $CanvasLayer/Interface.get_disk_trans())
 	if $CanvasLayer/Interface.get_coloring() == 1:
 		disk.set_color(distinction_color)
 	
