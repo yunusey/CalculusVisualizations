@@ -54,5 +54,8 @@ func get_function() -> Expression:
 func get_coloring() -> int:
 	return $ParamContainer/OptionButton.selected
 
+func get_disk_trans() -> float:
+	return $ParamContainer/DiskTrans.value
+
 func _on_function_edit_text_changed(_new_text: String) -> void:
 	function_changed.emit()

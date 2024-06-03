@@ -22,6 +22,7 @@ func set_color(new_color: Color) -> void:
 	material.set_shader_parameter("color", new_color)
 
 func set_alpha(new_alpha: float) -> void:
+	if material == null: material = $MeshInstance3D.mesh.material
 	material.set_shader_parameter("alpha", new_alpha)
 
 func set_rot(new_rotation: float) -> void:
@@ -53,6 +54,7 @@ func set_rot(new_rotation: float) -> void:
 
 func reset() -> void:
 	## Reset the rectangle's mesh if it has been changed to ArrayMesh
+	if material == null: material = $MeshInstance3D.mesh.material
 	material.set_shader_parameter("color", color)
 	material.set_shader_parameter("alpha", 0.5)
 	if $MeshInstance3D.mesh is ArrayMesh:
