@@ -5,6 +5,7 @@ var function: Expression = null
 signal num_rect_changed(value: int)
 signal disk_rotation_changed(value: float)
 signal disk_trans_changed(value: float)
+signal disk_pos_changed(value: float)
 signal coloring_changed(value: int)
 signal domain_changed(new_domain_min: float, new_domain_max: float)
 signal function_changed()
@@ -35,6 +36,12 @@ func _on_domain_max_value_changed(value: float) -> void:
 func _on_domain_min_value_changed(value: float) -> void:
 	domain_changed.emit(value, $ParamContainer/DomainMax.value)
 
+func _on_function_edit_text_changed(_new_text: String) -> void:
+	function_changed.emit()
+
+func _on_disk_pos_value_changed(value: float) -> void:
+	disk_pos_changed.emit(value)
+
 func get_num_rect() -> int:
 	return $ParamContainer/NumRect.value
 
@@ -57,6 +64,3 @@ func get_coloring() -> int:
 
 func get_disk_trans() -> float:
 	return $ParamContainer/DiskTrans.value
-
-func _on_function_edit_text_changed(_new_text: String) -> void:
-	function_changed.emit()

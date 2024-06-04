@@ -37,16 +37,31 @@ func set_rot(new_rotation: float) -> void:
 
 	for i in mdt.get_vertex_count():
 		var angle: float = (mdt.get_vertex(i).z + size.z / 2) / size.z * new_rotation
-		var dist_from_x: float = position.x + mdt.get_vertex(i).x
-		var new_x = dist_from_x * cos(angle) - position.x
-		var new_z = dist_from_x * sin(angle)
-		mdt.set_vertex(i, Vector3(new_x, mdt.get_vertex(i).y, new_z))
+		# var dist_from_x: float = position.x + mdt.get_vertex(i).x
+		# var new_x = dist_from_x * cos(angle) - position.x
+		# var new_z = dist_from_x * sin(angle)
+		var dist_from_y: float = position.y + mdt.get_vertex(i).y
+		var new_z = dist_from_y * sin(angle)
+		var new_y = dist_from_y * cos(angle) - position.y
+		mdt.set_vertex(i, Vector3(mdt.get_vertex(i).x, new_y, new_z))
 	
-	for face in mdt.get_face_count():
-		var normal = mdt.get_face_normal(face)
-		for vertex in range(3):
-			var face_vertex = mdt.get_face_vertex(face, vertex)
-			mdt.set_vertex_normal(face_vertex, normal)
+	for i in range(mdt.get_face_count()):
+		# Thank you Godot! :D
+		# Get the index in the vertex array.
+		var a = mdt.get_face_vertex(i, 0)
+		var b = mdt.get_face_vertex(i, 1)
+		var c = mdt.get_face_vertex(i, 2)
+		# Get vertex position using vertex index.
+		var ap = mdt.get_vertex(a)
+		var bp = mdt.get_vertex(b)
+		var cp = mdt.get_vertex(c)
+		# Calculate face normal.
+		var n = (bp - cp).cross(ap - bp).normalized()
+		# Add face normal to current vertex normal.
+		# This will not result in perfect normals, but it will be close.
+		mdt.set_vertex_normal(a, n + mdt.get_vertex_normal(a))
+		mdt.set_vertex_normal(b, n + mdt.get_vertex_normal(b))
+		mdt.set_vertex_normal(c, n + mdt.get_vertex_normal(c))
 
 	mesh.clear_surfaces()
 	mdt.commit_to_surface(mesh)

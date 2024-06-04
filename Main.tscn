@@ -44,6 +44,7 @@ light_energy = 0.205
 [node name="Rectangles" type="Node3D" parent="."]
 
 [connection signal="coloring_changed" from="CanvasLayer/Interface" to="." method="_on_interface_coloring_changed"]
+[connection signal="disk_pos_changed" from="CanvasLayer/Interface" to="." method="_on_interface_disk_pos_changed"]
 [connection signal="disk_rotation_changed" from="CanvasLayer/Interface" to="." method="_on_interface_disk_rotation_changed"]
 [connection signal="disk_trans_changed" from="CanvasLayer/Interface" to="." method="_on_interface_disk_trans_changed"]
 [connection signal="domain_changed" from="CanvasLayer/Interface" to="." method="_on_interface_domain_changed"]
