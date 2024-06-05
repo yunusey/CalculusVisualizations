@@ -7,7 +7,7 @@ extends Node3D
 @export var ordinary_color: Color = Color.BLUE
 
 func _ready() -> void:
-	self.update_rects()
+	update_rects()
 
 func _on_interface_num_rect_changed() -> void:
 	update_rects()
@@ -16,6 +16,12 @@ func _on_interface_disk_rotation_changed() -> void:
 	var disk = get_disk()
 	var rot = $CanvasLayer/Interface.get_disk_rotation()
 	disk.set_rot(rot)
+
+func _on_interface_shape_rotation_changed() -> void:
+	var disk = get_disk()
+	for rect in $Rectangles.get_children():
+		if rect != disk:
+			rect.set_rot($CanvasLayer/Interface.get_shape_rotation())
 
 func _on_interface_disk_trans_changed() -> void:
 	var disk = get_disk()
@@ -42,6 +48,9 @@ func update_rects() -> void:
 	var domain_max = $CanvasLayer/Interface.get_domain_max()
 	var lower_function = $CanvasLayer/Interface.get_lower_function()
 	var higher_function = $CanvasLayer/Interface.get_upper_function()
+	var shape_rotation = $CanvasLayer/Interface.get_shape_rotation()
+	var disk_rotation = $CanvasLayer/Interface.get_disk_rotation()
+	var disk_trans = $CanvasLayer/Interface.get_disk_trans()
 	var delta_x = (domain_max - domain_min) / (num_rects as float)
 
 	for i in num_rects:
@@ -55,6 +64,8 @@ func update_rects() -> void:
 		rect.reset()
 		rect.set_size(Vector3(delta_x, higher_y - lower_y, 0.01))
 		rect.set_pos(Vector3(x + delta_x / 2, (higher_y + lower_y) / 2, 0))
+		if shape_rotation > 0.1:
+			rect.set_rot(shape_rotation)
 		if $CanvasLayer/Interface.get_coloring() == 0:
 			rect.set_color(gradient.sample(i as float / num_rects))
 		else:
@@ -70,9 +81,8 @@ func update_rects() -> void:
 	
 	# Set disk properties
 	var disk = get_disk()
-	var disk_rotation = $CanvasLayer/Interface.get_disk_rotation()
 	disk.set_rot(disk_rotation)
-	disk.set_alpha(1. - $CanvasLayer/Interface.get_disk_trans())
+	disk.set_alpha(1. - disk_trans)
 	if $CanvasLayer/Interface.get_coloring() == 1:
 		disk.set_color(distinction_color)
 	

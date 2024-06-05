@@ -4,6 +4,7 @@ var lower_function: Expression = null
 var upper_function: Expression = null
 
 signal num_rect_changed()
+signal shape_rotation_changed()
 signal disk_rotation_changed()
 signal disk_trans_changed()
 signal disk_pos_changed()
@@ -25,6 +26,9 @@ func _on_num_rect_value_changed(_value: int) -> void:
 
 func _on_disk_rotation_value_changed(_value: float) -> void:
 	disk_rotation_changed.emit()
+
+func _on_shape_rotation_value_changed(_value: float) -> void:
+	shape_rotation_changed.emit()
 
 func _on_disk_trans_value_changed(_value: float) -> void:
 	disk_trans_changed.emit()
@@ -49,6 +53,9 @@ func get_num_rect() -> int:
 
 func get_disk_rotation() -> float:
 	return $ParamContainer/DiskRotation.value
+
+func get_shape_rotation() -> float:
+	return $ParamContainer/ShapeRotation.value
 
 func get_lower_function() -> Expression:
 	var new_function = get_function_from_string($ParamContainer/LowerFunction.text)

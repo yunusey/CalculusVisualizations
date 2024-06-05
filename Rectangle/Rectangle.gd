@@ -4,10 +4,7 @@ const RESOLUTION: int = 30
 
 var size: Vector3
 var color: Color
-var material: Material
-
-func _ready() -> void:
-	material = $MeshInstance3D.mesh.material
+var material: Material = null
 
 func set_size(new_size: Vector3) -> void:
 	size = new_size
