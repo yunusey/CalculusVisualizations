@@ -1,0 +1,52 @@
+[gd_scene load_steps=9 format=3 uid="uid://ybgsyd2spxmv"]
+
+[ext_resource type="PackedScene" uid="uid://vy5cxmmn2em" path="res://ShapeCrossMethod/ShapeCrossMethodInterface/ShapeCrossMethodInterface.tscn" id="1_443xw"]
+[ext_resource type="Script" path="res://ShapeCrossMethod/ShapeCrossMethod.gd" id="1_bha4m"]
+[ext_resource type="PackedScene" uid="uid://clngfumdb0vsj" path="res://GimbalCamera/GimbalCamera.tscn" id="2_78wvj"]
+[ext_resource type="PackedScene" uid="uid://kl7pssnx6ujy" path="res://Axes/Axes.tscn" id="3_c8b37"]
+
+[sub_resource type="Gradient" id="Gradient_j13tt"]
+colors = PackedColorArray(0.603922, 0.447059, 0.67451, 1, 1, 0.52549, 0.184314, 1)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_h785e"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_d1c81"]
+sky_material = SubResource("ProceduralSkyMaterial_h785e")
+
+[sub_resource type="Environment" id="Environment_esofn"]
+background_color = Color(0.0941176, 0.0980392, 0.14902, 1)
+sky = SubResource("Sky_d1c81")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="ShapeCrossMethod" type="Node3D"]
+script = ExtResource("1_bha4m")
+gradient = SubResource("Gradient_j13tt")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ShapeCrossMethodInterface" parent="CanvasLayer" instance=ExtResource("1_443xw")]
+
+[node name="GimbalCamera" parent="." instance=ExtResource("2_78wvj")]
+
+[node name="Axes" parent="." instance=ExtResource("3_c8b37")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_esofn")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+light_energy = 0.205
+
+[node name="Shapes" type="Node3D" parent="."]
+
+[connection signal="coloring_changed" from="CanvasLayer/ShapeCrossMethodInterface" to="." method="_on_coloring_changed"]
+[connection signal="disk_pos_changed" from="CanvasLayer/ShapeCrossMethodInterface" to="." method="_on_disk_pos_changed"]
+[connection signal="disk_trans_changed" from="CanvasLayer/ShapeCrossMethodInterface" to="." method="_on_disk_pos_changed"]
+[connection signal="domain_changed" from="CanvasLayer/ShapeCrossMethodInterface" to="." method="_on_domain_changed"]
+[connection signal="function_changed" from="CanvasLayer/ShapeCrossMethodInterface" to="." method="_on_function_changed"]
+[connection signal="num_shapes_changed" from="CanvasLayer/ShapeCrossMethodInterface" to="." method="_on_num_shapes_changed"]
+[connection signal="shape_trans_changed" from="CanvasLayer/ShapeCrossMethodInterface" to="." method="_on_shape_trans_changed"]
+[connection signal="shape_type_changed" from="CanvasLayer/ShapeCrossMethodInterface" to="." method="_on_shape_type_changed"]

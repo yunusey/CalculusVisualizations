@@ -1,7 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://by7b4rv4xfj8m"]
+[gd_scene load_steps=18 format=3 uid="uid://by7b4rv4xfj8m"]
 
 [ext_resource type="FontFile" uid="uid://dgfsq6i8mn4kl" path="res://Assets/Vollkorn-VariableFont_wght.ttf" id="1_0s4fo"]
-[ext_resource type="Script" path="res://Interface/Interface.gd" id="1_42uwa"]
+[ext_resource type="Script" path="res://DiskMethod/DiskMethodInterface/DiskMethodInterface.gd" id="1_42uwa"]
 [ext_resource type="FontFile" uid="uid://x71umklla4od" path="res://Assets/Vollkorn-Italic-VariableFont_wght.ttf" id="3_h75xf"]
 [ext_resource type="FontFile" uid="uid://bebsf5yy5ff1v" path="res://Assets/Latin Modern.otf" id="4_8q2bs"]
 
@@ -52,13 +52,36 @@ corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r77ep"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qpj3p"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1xw16"]
+bg_color = Color(0, 0.26322, 0.299531, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
 
 [sub_resource type="Theme" id="Theme_wyjx7"]
 default_font = ExtResource("4_8q2bs")
 default_font_size = 32
-LineEdit/styles/focus = SubResource("StyleBoxEmpty_r77ep")
-LineEdit/styles/normal = SubResource("StyleBoxFlat_gi74e")
+LineEdit/styles/focus = SubResource("StyleBoxEmpty_qpj3p")
+LineEdit/styles/normal = SubResource("StyleBoxFlat_1xw16")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6srxn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_flgdk"]
+bg_color = Color(0.439216, 0, 0.588235, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j05fl"]
+bg_color = Color(0, 0.262745, 0.298039, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
 
 [node name="Interface" type="Control"]
 layout_mode = 3
@@ -107,7 +130,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.709804, 0.741176, 0.992157, 1)
 theme_override_fonts/font = ExtResource("1_0s4fo")
 theme_override_font_sizes/font_size = 40
-text = "Shape Rotation:"
+text = "Shape Rot.:"
 horizontal_alignment = 2
 
 [node name="ShapeRotation" type="HSlider" parent="ParamContainer"]
@@ -127,7 +150,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.709804, 0.741176, 0.992157, 1)
 theme_override_fonts/font = ExtResource("1_0s4fo")
 theme_override_font_sizes/font_size = 40
-text = "Disk Rotation:"
+text = "Disk Rot.:"
 horizontal_alignment = 2
 
 [node name="DiskRotation" type="HSlider" parent="ParamContainer"]
@@ -142,12 +165,33 @@ theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_81xuu")
 max_value = 6.283
 step = 0.1
 
+[node name="Label11" type="Label" parent="ParamContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.709804, 0.741176, 0.992157, 1)
+theme_override_fonts/font = ExtResource("1_0s4fo")
+theme_override_font_sizes/font_size = 40
+text = "Shape Trans.:"
+horizontal_alignment = 2
+
+[node name="ShapeTrans" type="HSlider" parent="ParamContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+theme_override_constants/center_grabber = 0
+theme_override_styles/slider = SubResource("StyleBoxFlat_4eipt")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_j6y4i")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_81xuu")
+max_value = 1.0
+step = 0.01
+value = 0.5
+
 [node name="Label3" type="Label" parent="ParamContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.709804, 0.741176, 0.992157, 1)
 theme_override_fonts/font = ExtResource("1_0s4fo")
 theme_override_font_sizes/font_size = 40
-text = "Disk Transp.:"
+text = "Disk Trans.:"
 horizontal_alignment = 2
 
 [node name="DiskTrans" type="HSlider" parent="ParamContainer"]
@@ -288,9 +332,28 @@ value = 3.0
 alignment = 1
 update_on_text_changed = true
 
+[node name="Label12" type="Label" parent="ParamContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.709804, 0.741176, 0.992157, 1)
+theme_override_fonts/font = ExtResource("4_8q2bs")
+theme_override_font_sizes/font_size = 40
+horizontal_alignment = 2
+
+[node name="HomeButton" type="Button" parent="ParamContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_0s4fo")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/focus = SubResource("StyleBoxEmpty_6srxn")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_flgdk")
+theme_override_styles/hover = SubResource("StyleBoxFlat_flgdk")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_flgdk")
+theme_override_styles/normal = SubResource("StyleBoxFlat_j05fl")
+text = "Home"
+
 [connection signal="value_changed" from="ParamContainer/NumRect" to="." method="_on_num_rect_value_changed"]
 [connection signal="value_changed" from="ParamContainer/ShapeRotation" to="." method="_on_shape_rotation_value_changed"]
 [connection signal="value_changed" from="ParamContainer/DiskRotation" to="." method="_on_disk_rotation_value_changed"]
+[connection signal="value_changed" from="ParamContainer/ShapeTrans" to="." method="_on_shape_trans_value_changed"]
 [connection signal="value_changed" from="ParamContainer/DiskTrans" to="." method="_on_disk_trans_value_changed"]
 [connection signal="value_changed" from="ParamContainer/DiskPos" to="." method="_on_disk_pos_value_changed"]
 [connection signal="item_selected" from="ParamContainer/OptionButton" to="." method="_on_option_button_item_selected"]
@@ -298,3 +361,4 @@ update_on_text_changed = true
 [connection signal="text_changed" from="ParamContainer/LowerFunction" to="." method="_on_function_edit_text_changed"]
 [connection signal="value_changed" from="ParamContainer/DomainMin" to="." method="_on_domain_min_value_changed"]
 [connection signal="value_changed" from="ParamContainer/DomainMax" to="." method="_on_domain_max_value_changed"]
+[connection signal="pressed" from="ParamContainer/HomeButton" to="." method="_on_home_button_pressed"]

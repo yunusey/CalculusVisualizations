@@ -6,6 +6,7 @@ var upper_function: Expression = null
 signal num_rect_changed()
 signal shape_rotation_changed()
 signal disk_rotation_changed()
+signal shape_trans_changed()
 signal disk_trans_changed()
 signal disk_pos_changed()
 signal coloring_changed()
@@ -33,6 +34,9 @@ func _on_shape_rotation_value_changed(_value: float) -> void:
 func _on_disk_trans_value_changed(_value: float) -> void:
 	disk_trans_changed.emit()
 
+func _on_shape_trans_value_changed(_value: float) -> void:
+	shape_trans_changed.emit()
+
 func _on_option_button_item_selected(_value: int) -> void:
 	coloring_changed.emit()
 
@@ -48,14 +52,23 @@ func _on_function_edit_text_changed(_new_text: String) -> void:
 func _on_disk_pos_value_changed(_value: float) -> void:
 	disk_pos_changed.emit()
 
+func _on_home_button_pressed() -> void:
+	get_tree().change_scene_to_file("res://MainMenu.tscn")
+
 func get_num_rect() -> int:
 	return $ParamContainer/NumRect.value
+
+func get_shape_rotation() -> float:
+	return $ParamContainer/ShapeRotation.value
 
 func get_disk_rotation() -> float:
 	return $ParamContainer/DiskRotation.value
 
-func get_shape_rotation() -> float:
-	return $ParamContainer/ShapeRotation.value
+func get_shape_trans() -> float:
+	return $ParamContainer/ShapeTrans.value
+
+func get_disk_trans() -> float:
+	return $ParamContainer/DiskTrans.value
 
 func get_lower_function() -> Expression:
 	var new_function = get_function_from_string($ParamContainer/LowerFunction.text)
@@ -81,9 +94,6 @@ func get_function_from_string(func_string: String) -> Expression:
 func get_coloring() -> int:
 	return $ParamContainer/OptionButton.selected
 
-func get_disk_trans() -> float:
-	return $ParamContainer/DiskTrans.value
-
 func get_domain_min() -> float:
 	return $ParamContainer/DomainMin.value
 
@@ -92,3 +102,4 @@ func get_domain_max() -> float:
 
 func get_disk_pos() -> float:
 	return $ParamContainer/DiskPos.value
+

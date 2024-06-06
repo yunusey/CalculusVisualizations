@@ -1,6 +1,6 @@
 extends Node3D
 
-@onready var rectangle_scene = preload("res://Rectangle/Rectangle.tscn")
+@onready var rectangle_scene = preload("res://DiskMethod/Rectangle/Rectangle.tscn")
 
 @export var gradient: Gradient = Gradient.new()
 @export var distinction_color: Color = Color.RED
@@ -12,16 +12,23 @@ func _ready() -> void:
 func _on_interface_num_rect_changed() -> void:
 	update_rects()
 
-func _on_interface_disk_rotation_changed() -> void:
-	var disk = get_disk()
-	var rot = $CanvasLayer/Interface.get_disk_rotation()
-	disk.set_rot(rot)
-
 func _on_interface_shape_rotation_changed() -> void:
 	var disk = get_disk()
 	for rect in $Rectangles.get_children():
 		if rect != disk:
 			rect.set_rot($CanvasLayer/Interface.get_shape_rotation())
+
+func _on_interface_disk_rotation_changed() -> void:
+	var disk = get_disk()
+	var rot = $CanvasLayer/Interface.get_disk_rotation()
+	disk.set_rot(rot)
+
+func _on_interface_shape_trans_changed() -> void:
+	var disk = get_disk()
+	for rect in $Rectangles.get_children():
+		if rect != disk:
+			var trans = $CanvasLayer/Interface.get_shape_trans()
+			rect.set_alpha(1. - trans)
 
 func _on_interface_disk_trans_changed() -> void:
 	var disk = get_disk()
@@ -51,6 +58,7 @@ func update_rects() -> void:
 	var shape_rotation = $CanvasLayer/Interface.get_shape_rotation()
 	var disk_rotation = $CanvasLayer/Interface.get_disk_rotation()
 	var disk_trans = $CanvasLayer/Interface.get_disk_trans()
+	var shape_trans = $CanvasLayer/Interface.get_shape_trans()
 	var delta_x = (domain_max - domain_min) / (num_rects as float)
 
 	for i in num_rects:
@@ -61,11 +69,10 @@ func update_rects() -> void:
 
 		# Set rectangle position and color
 		var rect = $Rectangles.get_child(i) if i < $Rectangles.get_child_count() else rectangle_scene.instantiate()
-		rect.reset()
 		rect.set_size(Vector3(delta_x, higher_y - lower_y, 0.01))
 		rect.set_pos(Vector3(x + delta_x / 2, (higher_y + lower_y) / 2, 0))
-		if shape_rotation > 0.1:
-			rect.set_rot(shape_rotation)
+		rect.set_alpha(1. - shape_trans)
+		rect.set_rot(shape_rotation)
 		if $CanvasLayer/Interface.get_coloring() == 0:
 			rect.set_color(gradient.sample(i as float / num_rects))
 		else:

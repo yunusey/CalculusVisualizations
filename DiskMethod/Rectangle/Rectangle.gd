@@ -8,7 +8,7 @@ var material: Material = null
 
 func set_size(new_size: Vector3) -> void:
 	size = new_size
-	$MeshInstance3D.mesh.size = new_size
+	# $MeshInstance3D.mesh.size = new_size
 
 func set_pos(new_position: Vector3) -> void:
 	position = new_position

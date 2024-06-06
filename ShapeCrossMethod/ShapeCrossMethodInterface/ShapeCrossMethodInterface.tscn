@@ -1,0 +1,327 @@
+[gd_scene load_steps=18 format=3 uid="uid://vy5cxmmn2em"]
+
+[ext_resource type="FontFile" uid="uid://dgfsq6i8mn4kl" path="res://Assets/Vollkorn-VariableFont_wght.ttf" id="1_2phhj"]
+[ext_resource type="Script" path="res://ShapeCrossMethod/ShapeCrossMethodInterface/ShapeCrossMethodInterface.gd" id="1_f6a18"]
+[ext_resource type="FontFile" uid="uid://x71umklla4od" path="res://Assets/Vollkorn-Italic-VariableFont_wght.ttf" id="2_a1h55"]
+[ext_resource type="FontFile" uid="uid://bebsf5yy5ff1v" path="res://Assets/Latin Modern.otf" id="3_6gsh8"]
+
+[sub_resource type="Theme" id="Theme_exjm1"]
+default_font = ExtResource("2_a1h55")
+default_font_size = 32
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n4hnk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1wkm1"]
+bg_color = Color(0.622705, 0.0064463, 0.403124, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1xw16"]
+bg_color = Color(0, 0.26322, 0.299531, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b2ekq"]
+content_margin_top = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0, 0.650996, 0.555928, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xfafb"]
+content_margin_top = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.787534, 6.50728e-05, 3.41728e-05, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_402h0"]
+content_margin_top = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 0.477854, 0.410057, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r77ep"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gi74e"]
+bg_color = Color(0, 0.26322, 0.299531, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="Theme" id="Theme_ggigu"]
+default_font = ExtResource("3_6gsh8")
+default_font_size = 32
+LineEdit/styles/focus = SubResource("StyleBoxEmpty_r77ep")
+LineEdit/styles/normal = SubResource("StyleBoxFlat_gi74e")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_y563a"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4fndv"]
+bg_color = Color(0.439216, 0, 0.588235, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4ox4r"]
+bg_color = Color(0, 0.262745, 0.298039, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="ShapeCrossMethodInterface" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_f6a18")
+
+[node name="ParamContainer" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -470.0
+offset_right = -11.0
+offset_bottom = 240.0
+grow_horizontal = 0
+theme_override_constants/h_separation = 10
+columns = 2
+
+[node name="Label9" type="Label" parent="ParamContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.709804, 0.741176, 0.992157, 1)
+theme_override_fonts/font = ExtResource("1_2phhj")
+theme_override_font_sizes/font_size = 40
+text = "Shape:"
+horizontal_alignment = 2
+
+[node name="ShapeButton" type="OptionButton" parent="ParamContainer"]
+layout_mode = 2
+focus_mode = 0
+theme = SubResource("Theme_exjm1")
+theme_override_fonts/font = ExtResource("2_a1h55")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/focus = SubResource("StyleBoxEmpty_n4hnk")
+theme_override_styles/hover = SubResource("StyleBoxFlat_1wkm1")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_1wkm1")
+theme_override_styles/normal = SubResource("StyleBoxFlat_1xw16")
+alignment = 1
+selected = 0
+item_count = 2
+popup/item_0/text = "Squares"
+popup/item_0/id = 1
+popup/item_1/text = "Equilateral Triangles"
+popup/item_1/id = 1
+
+[node name="Label" type="Label" parent="ParamContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.709804, 0.741176, 0.992157, 1)
+theme_override_fonts/font = ExtResource("1_2phhj")
+theme_override_font_sizes/font_size = 40
+text = "# Shapes:"
+horizontal_alignment = 2
+
+[node name="NumShapes" type="HSlider" parent="ParamContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+theme_override_constants/center_grabber = 0
+theme_override_styles/slider = SubResource("StyleBoxFlat_b2ekq")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_xfafb")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_402h0")
+min_value = 1.0
+max_value = 200.0
+value = 5.0
+
+[node name="Label11" type="Label" parent="ParamContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.709804, 0.741176, 0.992157, 1)
+theme_override_fonts/font = ExtResource("1_2phhj")
+theme_override_font_sizes/font_size = 40
+text = "Shape Trans.:"
+horizontal_alignment = 2
+
+[node name="ShapeTrans" type="HSlider" parent="ParamContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+theme_override_constants/center_grabber = 0
+theme_override_styles/slider = SubResource("StyleBoxFlat_b2ekq")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_xfafb")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_402h0")
+max_value = 1.0
+step = 0.01
+value = 0.5
+
+[node name="Label3" type="Label" parent="ParamContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.709804, 0.741176, 0.992157, 1)
+theme_override_fonts/font = ExtResource("1_2phhj")
+theme_override_font_sizes/font_size = 40
+text = "Disk Trans.:"
+horizontal_alignment = 2
+
+[node name="DiskTrans" type="HSlider" parent="ParamContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+theme_override_constants/center_grabber = 0
+theme_override_styles/slider = SubResource("StyleBoxFlat_b2ekq")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_xfafb")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_402h0")
+max_value = 1.0
+step = 0.01
+value = 0.2
+
+[node name="Label8" type="Label" parent="ParamContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.709804, 0.741176, 0.992157, 1)
+theme_override_fonts/font = ExtResource("1_2phhj")
+theme_override_font_sizes/font_size = 40
+text = "Disk Pos.:"
+horizontal_alignment = 2
+
+[node name="DiskPos" type="HSlider" parent="ParamContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+theme_override_constants/center_grabber = 0
+theme_override_styles/slider = SubResource("StyleBoxFlat_b2ekq")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_xfafb")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_402h0")
+max_value = 1.0
+step = 0.01
+value = 0.5
+
+[node name="Label4" type="Label" parent="ParamContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.709804, 0.741176, 0.992157, 1)
+theme_override_fonts/font = ExtResource("1_2phhj")
+theme_override_font_sizes/font_size = 40
+text = "Coloring:"
+horizontal_alignment = 2
+
+[node name="ColoringButton" type="OptionButton" parent="ParamContainer"]
+layout_mode = 2
+focus_mode = 0
+theme = SubResource("Theme_exjm1")
+theme_override_fonts/font = ExtResource("2_a1h55")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/focus = SubResource("StyleBoxEmpty_n4hnk")
+theme_override_styles/hover = SubResource("StyleBoxFlat_1wkm1")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_1wkm1")
+theme_override_styles/normal = SubResource("StyleBoxFlat_1xw16")
+alignment = 1
+selected = 0
+item_count = 2
+popup/item_0/text = "Gradient"
+popup/item_1/text = "Distinct"
+popup/item_1/id = 1
+
+[node name="Label5" type="Label" parent="ParamContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.709804, 0.741176, 0.992157, 1)
+theme_override_fonts/font = ExtResource("3_6gsh8")
+theme_override_font_sizes/font_size = 40
+text = "f(x) = "
+horizontal_alignment = 2
+
+[node name="Function" type="LineEdit" parent="ParamContainer"]
+layout_mode = 2
+focus_mode = 1
+theme_override_fonts/font = ExtResource("3_6gsh8")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/focus = SubResource("StyleBoxEmpty_n4hnk")
+theme_override_styles/normal = SubResource("StyleBoxFlat_1xw16")
+text = "x"
+alignment = 1
+expand_to_text_length = true
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+
+[node name="Label6" type="Label" parent="ParamContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.709804, 0.741176, 0.992157, 1)
+theme_override_fonts/font = ExtResource("3_6gsh8")
+theme_override_font_sizes/font_size = 40
+text = "a = "
+horizontal_alignment = 2
+
+[node name="DomainMin" type="SpinBox" parent="ParamContainer"]
+layout_mode = 2
+theme = SubResource("Theme_ggigu")
+min_value = -5.0
+max_value = 5.0
+step = 0.1
+page = 0.1
+alignment = 1
+update_on_text_changed = true
+
+[node name="Label7" type="Label" parent="ParamContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.709804, 0.741176, 0.992157, 1)
+theme_override_fonts/font = ExtResource("3_6gsh8")
+theme_override_font_sizes/font_size = 40
+text = "b = "
+horizontal_alignment = 2
+
+[node name="DomainMax" type="SpinBox" parent="ParamContainer"]
+layout_mode = 2
+theme = SubResource("Theme_ggigu")
+min_value = -5.0
+max_value = 5.0
+step = 0.1
+page = 0.1
+value = 3.0
+alignment = 1
+update_on_text_changed = true
+
+[node name="Label2" type="Label" parent="ParamContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.709804, 0.741176, 0.992157, 1)
+theme_override_fonts/font = ExtResource("3_6gsh8")
+theme_override_font_sizes/font_size = 40
+horizontal_alignment = 2
+
+[node name="HomeButton" type="Button" parent="ParamContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_2phhj")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/focus = SubResource("StyleBoxEmpty_y563a")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_4fndv")
+theme_override_styles/hover = SubResource("StyleBoxFlat_4fndv")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_4fndv")
+theme_override_styles/normal = SubResource("StyleBoxFlat_4ox4r")
+text = "Home"
+
+[connection signal="item_selected" from="ParamContainer/ShapeButton" to="." method="_on_shape_button_item_selected"]
+[connection signal="value_changed" from="ParamContainer/NumShapes" to="." method="_on_num_shapes_changed"]
+[connection signal="value_changed" from="ParamContainer/ShapeTrans" to="." method="_on_shape_trans_changed"]
+[connection signal="value_changed" from="ParamContainer/DiskTrans" to="." method="_on_disk_trans_changed"]
+[connection signal="value_changed" from="ParamContainer/DiskPos" to="." method="_on_disk_pos_changed"]
+[connection signal="item_selected" from="ParamContainer/ColoringButton" to="." method="_on_coloring_button_item_selected"]
+[connection signal="text_changed" from="ParamContainer/Function" to="." method="_on_function_text_changed"]
+[connection signal="value_changed" from="ParamContainer/DomainMin" to="." method="_on_domain_min_value_changed"]
+[connection signal="value_changed" from="ParamContainer/DomainMax" to="." method="_on_domain_max_value_changed"]
+[connection signal="pressed" from="ParamContainer/HomeButton" to="." method="_on_home_button_pressed"]

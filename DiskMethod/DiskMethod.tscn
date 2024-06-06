@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://dicuapfgkvy6m"]
 
-[ext_resource type="Script" path="res://Main.gd" id="1_7p7it"]
-[ext_resource type="PackedScene" uid="uid://by7b4rv4xfj8m" path="res://Interface/Interface.tscn" id="1_lidso"]
+[ext_resource type="Script" path="res://DiskMethod/DiskMethod.gd" id="1_7p7it"]
+[ext_resource type="PackedScene" uid="uid://by7b4rv4xfj8m" path="res://DiskMethod/DiskMethodInterface/DiskMethodInterface.tscn" id="1_lidso"]
 [ext_resource type="PackedScene" uid="uid://clngfumdb0vsj" path="res://GimbalCamera/GimbalCamera.tscn" id="3_v6r80"]
 [ext_resource type="PackedScene" uid="uid://kl7pssnx6ujy" path="res://Axes/Axes.tscn" id="4_af5wu"]
 
@@ -12,16 +12,16 @@ colors = PackedColorArray(0.603922, 0.447059, 0.67451, 1, 1, 0.52549, 0.184314, 
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 
-[sub_resource type="Sky" id="Sky_d1c81"]
+[sub_resource type="Sky" id="Sky_tqfoh"]
 sky_material = SubResource("ProceduralSkyMaterial_6uupr")
 
 [sub_resource type="Environment" id="Environment_sex3u"]
 background_color = Color(0.0941176, 0.0980392, 0.14902, 1)
-sky = SubResource("Sky_d1c81")
+sky = SubResource("Sky_tqfoh")
 tonemap_mode = 2
 glow_enabled = true
 
-[node name="Main" type="Node3D"]
+[node name="DiskMethod" type="Node3D"]
 script = ExtResource("1_7p7it")
 gradient = SubResource("Gradient_j13tt")
 
@@ -30,7 +30,6 @@ gradient = SubResource("Gradient_j13tt")
 [node name="Interface" parent="CanvasLayer" instance=ExtResource("1_lidso")]
 
 [node name="GimbalCamera" parent="." instance=ExtResource("3_v6r80")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="Axes" parent="." instance=ExtResource("4_af5wu")]
 
@@ -51,3 +50,4 @@ light_energy = 0.205
 [connection signal="function_changed" from="CanvasLayer/Interface" to="." method="_on_interface_function_changed"]
 [connection signal="num_rect_changed" from="CanvasLayer/Interface" to="." method="_on_interface_num_rect_changed"]
 [connection signal="shape_rotation_changed" from="CanvasLayer/Interface" to="." method="_on_interface_shape_rotation_changed"]
+[connection signal="shape_trans_changed" from="CanvasLayer/Interface" to="." method="_on_interface_shape_trans_changed"]

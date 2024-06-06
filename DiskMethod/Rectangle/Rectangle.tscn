@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://duqaqcpln78so"]
 
-[ext_resource type="Script" path="res://Rectangle/Rectangle.gd" id="1_3ljti"]
-[ext_resource type="Shader" path="res://Rectangle/Rectangle.gdshader" id="2_gbck3"]
+[ext_resource type="Script" path="res://DiskMethod/Rectangle/Rectangle.gd" id="1_3ljti"]
+[ext_resource type="Shader" path="res://DiskMethod/Rectangle/Rectangle.gdshader" id="2_gbck3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nr5tf"]
 resource_local_to_scene = true

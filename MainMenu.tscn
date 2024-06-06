@@ -1,0 +1,137 @@
+[gd_scene load_steps=11 format=3 uid="uid://d11m1m5sjahig"]
+
+[ext_resource type="FontFile" uid="uid://x71umklla4od" path="res://Assets/Vollkorn-Italic-VariableFont_wght.ttf" id="1_v6em3"]
+[ext_resource type="Script" path="res://MainMenu.gd" id="1_vimsm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ivchr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kxuus"]
+content_margin_left = 10.0
+content_margin_right = 10.0
+bg_color = Color(0.564706, 0, 0.0588235, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8a1r5"]
+content_margin_left = 10.0
+content_margin_right = 10.0
+bg_color = Color(0, 0.336819, 0.362884, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cj8lv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4ajtf"]
+content_margin_left = 10.0
+content_margin_right = 10.0
+bg_color = Color(0.565775, 0, 0.0574289, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2mxb4"]
+content_margin_left = 10.0
+content_margin_right = 10.0
+bg_color = Color(0, 0.336819, 0.362884, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ein0k"]
+content_margin_left = 10.0
+content_margin_right = 10.0
+bg_color = Color(0.564706, 0, 0.0588235, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7itys"]
+content_margin_left = 10.0
+content_margin_right = 10.0
+bg_color = Color(0.439216, 0, 0.588235, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vimsm")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 28
+
+[node name="Label" type="RichTextLabel" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("1_v6em3")
+theme_override_font_sizes/bold_italics_font_size = 128
+theme_override_font_sizes/italics_font_size = 128
+theme_override_font_sizes/mono_font_size = 128
+theme_override_font_sizes/normal_font_size = 128
+theme_override_font_sizes/bold_font_size = 128
+bbcode_enabled = true
+text = "[color=#B5BDFD]Calculus Visualizations[/color]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="DiskMethodButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_v6em3")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ivchr")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_kxuus")
+theme_override_styles/hover = SubResource("StyleBoxFlat_kxuus")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_kxuus")
+theme_override_styles/normal = SubResource("StyleBoxFlat_8a1r5")
+text = "Disk/Washer Method"
+
+[node name="ShapeCrossButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_v6em3")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cj8lv")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_4ajtf")
+theme_override_styles/hover = SubResource("StyleBoxFlat_4ajtf")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_4ajtf")
+theme_override_styles/normal = SubResource("StyleBoxFlat_2mxb4")
+text = "Shape Cross-Sections"
+
+[node name="AboutButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_v6em3")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cj8lv")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_ein0k")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ein0k")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ein0k")
+theme_override_styles/normal = SubResource("StyleBoxFlat_7itys")
+text = "About/Help"
+
+[connection signal="pressed" from="VBoxContainer/DiskMethodButton" to="." method="_on_disk_method_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/ShapeCrossButton" to="." method="_on_shape_cross_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/AboutButton" to="." method="_on_about_button_pressed"]
