@@ -50,9 +50,9 @@ theme_override_fonts/italics_font = ExtResource("2_8yg02")
 theme_override_fonts/bold_italics_font = ExtResource("2_8yg02")
 theme_override_fonts/bold_font = ExtResource("3_undbl")
 theme_override_font_sizes/bold_italics_font_size = 64
-theme_override_font_sizes/italics_font_size = 64
+theme_override_font_sizes/italics_font_size = 60
 theme_override_font_sizes/mono_font_size = 64
-theme_override_font_sizes/normal_font_size = 64
+theme_override_font_sizes/normal_font_size = 60
 theme_override_font_sizes/bold_font_size = 64
 theme_override_styles/focus = SubResource("StyleBoxEmpty_70ig8")
 bbcode_enabled = true
@@ -63,26 +63,19 @@ text = "[center][font_size=128][color=#B5BDFD]About/Help[/color][/font_size][/ce
 To move around, you can use [color=#B5BDFD]WASD[/color] keys.
 To zoom in/out,  you can use [color=#B5BDFD]scroll wheel[/color].
 To toggle the visibility of the option menu, you can use [color=#B5BDFD]H[/color] key.
+You might've realized that expressions like [font=res://Assets/Latin Modern.otf]x^2[/font] or [font=res://Assets/Latin Modern.otf]ln(x)[/font] don't work out as functions. The reason is that you should use Godot's expressions. You can read more [url=https://docs.godotengine.org/en/stable/tutorials/scripting/evaluating_expressions.html#]here[/url].
 [/ul]
 
 If you are interested, you can visit [color=#B5BDFD][url=\"https://github.com/yunusey/CalculusVisualizations\"]Calculus Visualizations[/url][/color] on GitHub!"
-fit_content = true
 scroll_active = false
 selection_enabled = true
 
 [node name="HomeButton" type="Button" parent="."]
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -88.5
-offset_top = -121.84
-offset_right = 88.5
-offset_bottom = -23.84
-grow_horizontal = 2
-grow_vertical = 0
+offset_left = 50.0
+offset_top = 33.0
+offset_right = 227.0
+offset_bottom = 131.0
 theme_override_fonts/font = ExtResource("1_yettj")
 theme_override_font_sizes/font_size = 64
 theme_override_styles/focus = SubResource("StyleBoxEmpty_usyxj")
