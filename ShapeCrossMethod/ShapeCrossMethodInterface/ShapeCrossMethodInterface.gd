@@ -13,6 +13,7 @@ signal domain_changed()
 
 func _ready() -> void:
 	$ParamContainer/ShapeButton.select(0)
+	$ParamContainer/ColoringButton.select(0)
 	function = get_function()
 
 func _on_shape_button_item_selected(_index: int) -> void:
