@@ -5,8 +5,10 @@ extends Node3D
 @export var gradient: Gradient = Gradient.new()
 @export var distinction_color: Color = Color.RED
 @export var ordinary_color: Color = Color.BLUE
+@export var disk_rect_index: int = 0
 
 func _ready() -> void:
+	disk_rect_index = $CanvasLayer/Interface.get_disk_pos()
 	update_rects()
 
 func _on_interface_num_rect_changed() -> void:
@@ -47,7 +49,26 @@ func _on_interface_function_changed() -> void:
 	update_rects()
 
 func _on_interface_disk_pos_changed() -> void:
-	update_rects()
+	var num_rects = $CanvasLayer/Interface.get_num_rect()
+	var shape_trans = $CanvasLayer/Interface.get_shape_trans()
+	var disk_trans = $CanvasLayer/Interface.get_disk_trans()
+	var shape_rotation = $CanvasLayer/Interface.get_shape_rotation()
+	var disk_rotation = $CanvasLayer/Interface.get_disk_rotation()
+	var new_disk_index = $CanvasLayer/Interface.get_disk_pos() * (num_rects - 1)
+	var old_disk = $Rectangles.get_child(disk_rect_index)
+	var new_disk = $Rectangles.get_child(new_disk_index)
+
+	old_disk.set_alpha(1. - shape_trans)
+	new_disk.set_alpha(1. - disk_trans)
+
+	old_disk.set_rot(shape_rotation)
+	new_disk.set_rot(disk_rotation)
+
+	if $CanvasLayer/Interface.get_coloring() == 1:
+		new_disk.set_color(distinction_color)
+		old_disk.set_color(ordinary_color)
+	
+	disk_rect_index = new_disk_index
 
 func update_rects() -> void:
 	var num_rects = $CanvasLayer/Interface.get_num_rect()
@@ -111,5 +132,5 @@ func color_rects_by_distinction() -> void:
 func get_disk() -> Node3D:
 	var num_rects = $CanvasLayer/Interface.get_num_rect()
 	var disk_pos = $CanvasLayer/Interface.get_disk_pos()
-	var disk_rect_index = disk_pos * (num_rects - 1)
+	disk_rect_index = disk_pos * (num_rects - 1)
 	return $Rectangles.get_child(disk_rect_index)
