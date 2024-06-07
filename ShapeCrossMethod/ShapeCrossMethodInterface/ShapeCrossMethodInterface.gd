@@ -16,6 +16,10 @@ func _ready() -> void:
 	$ParamContainer/ColoringButton.select(0)
 	function = get_function()
 
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("toggle_gui"):
+		visible = !visible
+
 func _on_shape_button_item_selected(_index: int) -> void:
 	shape_type_changed.emit()
 
