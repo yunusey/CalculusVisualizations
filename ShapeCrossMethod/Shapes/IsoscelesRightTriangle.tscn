@@ -1,22 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://b81f2i72qge6u"]
+[gd_scene load_steps=5 format=3 uid="uid://c40wvtunt3thd"]
 
-[ext_resource type="Script" path="res://ShapeCrossMethod/Shapes/EquilateralTriangle.gd" id="1_l32af"]
-[ext_resource type="Shader" path="res://ShapeCrossMethod/Shapes/Shape.gdshader" id="2_qk10j"]
+[ext_resource type="Script" path="res://ShapeCrossMethod/Shapes/IsoscelesRightTriangle.gd" id="1_6es52"]
+[ext_resource type="Shader" path="res://ShapeCrossMethod/Shapes/Shape.gdshader" id="2_wcmfw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_myypc"]
 resource_local_to_scene = true
 render_priority = 0
-shader = ExtResource("2_qk10j")
+shader = ExtResource("2_wcmfw")
 shader_parameter/color = Color(1, 0, 0, 1)
 shader_parameter/alpha = 0.5
 
 [sub_resource type="PrismMesh" id="PrismMesh_sxafn"]
 resource_local_to_scene = true
 material = SubResource("ShaderMaterial_myypc")
-size = Vector3(1, 0.866, 1)
+left_to_right = 0.0
 
-[node name="EquilateralTriangle" type="Node3D"]
-script = ExtResource("1_l32af")
+[node name="IsoscelesRightTriangle" type="Node3D"]
+script = ExtResource("1_6es52")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)

@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://disnqri7g8il0"]
+
+[ext_resource type="ArrayMesh" uid="uid://cocirbvebns28" path="res://Assets/SemiCylinder.obj" id="1_0brya"]
+[ext_resource type="Script" path="res://ShapeCrossMethod/Shapes/SemiCircle.gd" id="1_44ccg"]
+[ext_resource type="Shader" path="res://ShapeCrossMethod/Shapes/Shape.gdshader" id="3_oxig1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y4ftj"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_oxig1")
+shader_parameter/color = Color(1, 0, 0, 1)
+shader_parameter/alpha = 0.5
+
+[node name="SemiCircle" type="Node3D"]
+script = ExtResource("1_44ccg")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, -0.0116417, -0.0212367, 0.00479007)
+mesh = ExtResource("1_0brya")
+surface_material_override/0 = SubResource("ShaderMaterial_y4ftj")

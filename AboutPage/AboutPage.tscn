@@ -63,11 +63,10 @@ text = "[center][font_size=128][color=#B5BDFD]About/Help[/color][/font_size][/ce
 To move around, you can use [color=#B5BDFD]WASD[/color] keys.
 To zoom in/out,  you can use [color=#B5BDFD]scroll wheel[/color].
 To toggle the visibility of the option menu, you can use [color=#B5BDFD]H[/color] key.
-You might've realized that expressions like [font=res://Assets/Latin Modern.otf]x^2[/font] or [font=res://Assets/Latin Modern.otf]ln(x)[/font] don't work out as functions. The reason is that you should use Godot's expressions. You can read more [url=https://docs.godotengine.org/en/stable/tutorials/scripting/evaluating_expressions.html#]here[/url].
+You might've realized that expressions like [font=res://Assets/Latin Modern.otf]x^2[/font] or [font=res://Assets/Latin Modern.otf]ln(x)[/font] don't work out as functions. The reason is that you should use Godot's expressions. You can read more [url=https://docs.godotengine.org/en/stable/tutorials/scripting/evaluating_expressions.html#]here[/url], but here are several distinctions:
 [/ul]
-
+[center][img]res://Assets/equation.svg[/img][/center]
 If you are interested, you can visit [color=#B5BDFD][url=\"https://github.com/yunusey/CalculusVisualizations\"]Calculus Visualizations[/url][/color] on GitHub!"
-scroll_active = false
 selection_enabled = true
 
 [node name="HomeButton" type="Button" parent="."]

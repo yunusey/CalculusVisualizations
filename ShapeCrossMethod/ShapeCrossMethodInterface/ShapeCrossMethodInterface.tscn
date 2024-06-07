@@ -124,11 +124,14 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_1wkm1")
 theme_override_styles/normal = SubResource("StyleBoxFlat_1xw16")
 alignment = 1
 selected = 0
-item_count = 2
+item_count = 4
 popup/item_0/text = "Squares"
-popup/item_0/id = 1
 popup/item_1/text = "Equilateral Triangles"
 popup/item_1/id = 1
+popup/item_2/text = "Isosceles Right Triangle"
+popup/item_2/id = 2
+popup/item_3/text = "Semi Circles"
+popup/item_3/id = 3
 
 [node name="Label" type="Label" parent="ParamContainer"]
 layout_mode = 2

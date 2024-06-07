@@ -1,7 +1,9 @@
 extends Node3D
 
 @onready var square_scene = preload("res://ShapeCrossMethod/Shapes/Square.tscn")
-@onready var triangle_scene = preload("res://ShapeCrossMethod/Shapes/EquilateralTriangle.tscn")
+@onready var equilateral_triangle_scene = preload("res://ShapeCrossMethod/Shapes/EquilateralTriangle.tscn")
+@onready var isosceles_right_triangle_scene = preload("res://ShapeCrossMethod/Shapes/IsoscelesRightTriangle.tscn")
+@onready var semi_circle_scene = preload("res://ShapeCrossMethod/Shapes/SemiCircle.tscn")
 
 @export var gradient: Gradient = Gradient.new()
 @export var distinction_color: Color = Color.RED
@@ -109,5 +111,7 @@ func color_shapes_by_distinction() -> void:
 func get_shape_scene() -> PackedScene:
 	match $CanvasLayer/ShapeCrossMethodInterface.get_shape_type():
 		0: return square_scene
-		1: return triangle_scene
+		1: return equilateral_triangle_scene
+		2: return isosceles_right_triangle_scene
+		3: return semi_circle_scene
 		_: return square_scene
