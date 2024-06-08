@@ -1,26 +1,32 @@
 extends Node3D
 
+
 const RESOLUTION: int = 30
+
 
 var size: Vector3
 var color: Color
 var material: Material = null
 
+
 func set_size(new_size: Vector3) -> void:
 	size = new_size
-	# $MeshInstance3D.mesh.size = new_size
+
 
 func set_pos(new_position: Vector3) -> void:
 	position = new_position
+
 
 func set_color(new_color: Color) -> void:
 	if material == null: material = $MeshInstance3D.mesh.material
 	color = new_color
 	material.set_shader_parameter("color", new_color)
 
+
 func set_alpha(new_alpha: float) -> void:
 	if material == null: material = $MeshInstance3D.mesh.material
 	material.set_shader_parameter("alpha", new_alpha)
+
 
 func set_rot(new_rotation: float) -> void:
 	var mesh = ArrayMesh.new()
@@ -63,6 +69,7 @@ func set_rot(new_rotation: float) -> void:
 	mesh.clear_surfaces()
 	mdt.commit_to_surface(mesh)
 	$MeshInstance3D.mesh = mesh
+
 
 func reset() -> void:
 	## Reset the rectangle's mesh if it has been changed to ArrayMesh

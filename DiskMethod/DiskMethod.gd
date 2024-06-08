@@ -1,18 +1,23 @@
 extends Node3D
 
+
 @onready var rectangle_scene = preload("res://DiskMethod/Rectangle/Rectangle.tscn")
+
 
 @export var gradient: Gradient = Gradient.new()
 @export var distinction_color: Color = Color.RED
 @export var ordinary_color: Color = Color.BLUE
 @export var disk_rect_index: int = 0
 
+
 func _ready() -> void:
 	disk_rect_index = $CanvasLayer/Interface.get_disk_pos()
 	update_rects()
 
+
 func _on_interface_num_rect_changed() -> void:
 	update_rects()
+
 
 func _on_interface_shape_rotation_changed() -> void:
 	var disk = get_disk()
@@ -20,10 +25,12 @@ func _on_interface_shape_rotation_changed() -> void:
 		if rect != disk:
 			rect.set_rot($CanvasLayer/Interface.get_shape_rotation())
 
+
 func _on_interface_disk_rotation_changed() -> void:
 	var disk = get_disk()
 	var rot = $CanvasLayer/Interface.get_disk_rotation()
 	disk.set_rot(rot)
+
 
 func _on_interface_shape_trans_changed() -> void:
 	var disk = get_disk()
@@ -32,21 +39,26 @@ func _on_interface_shape_trans_changed() -> void:
 			var trans = $CanvasLayer/Interface.get_shape_trans()
 			rect.set_alpha(1. - trans)
 
+
 func _on_interface_disk_trans_changed() -> void:
 	var disk = get_disk()
 	var trans = $CanvasLayer/Interface.get_disk_trans()
 	disk.set_alpha(1. - trans)
+
 
 func _on_interface_coloring_changed() -> void:
 	match $CanvasLayer/Interface.get_coloring():
 		0: color_rects_by_gradient()
 		1: color_rects_by_distinction()
 
+
 func _on_interface_domain_changed() -> void:
 	update_rects()
 
+
 func _on_interface_function_changed() -> void:
 	update_rects()
+
 
 func _on_interface_disk_pos_changed() -> void:
 	var num_rects = $CanvasLayer/Interface.get_num_rect()
@@ -73,6 +85,7 @@ func _on_interface_disk_pos_changed() -> void:
 		old_disk.set_color(ordinary_color)
 	
 	disk_rect_index = new_disk_index
+
 
 func update_rects() -> void:
 	var num_rects = $CanvasLayer/Interface.get_num_rect()
@@ -119,12 +132,14 @@ func update_rects() -> void:
 	if $CanvasLayer/Interface.get_coloring() == 1:
 		disk.set_color(distinction_color)
 	
+
 func color_rects_by_gradient() -> void:
 	var num_rects = $Rectangles.get_child_count()
 	for i in num_rects:
 		$Rectangles.get_child(i).set_color(
 			gradient.sample(i as float / num_rects)
 		)
+
 
 func color_rects_by_distinction() -> void:
 	var num_rects = $Rectangles.get_child_count()
@@ -133,6 +148,7 @@ func color_rects_by_distinction() -> void:
 		var rect = $Rectangles.get_child(i)
 		var color = distinction_color if rect == disk else ordinary_color
 		rect.set_color(color)
+
 
 func get_disk() -> Node3D:
 	var num_rects = $CanvasLayer/Interface.get_num_rect()

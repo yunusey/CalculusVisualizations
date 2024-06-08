@@ -1,18 +1,22 @@
 extends Node3D
 
+
 @onready var square_scene = preload("res://ShapeCrossMethod/Shapes/Square.tscn")
 @onready var equilateral_triangle_scene = preload("res://ShapeCrossMethod/Shapes/EquilateralTriangle.tscn")
 @onready var isosceles_right_triangle_scene = preload("res://ShapeCrossMethod/Shapes/IsoscelesRightTriangle.tscn")
 @onready var semi_circle_scene = preload("res://ShapeCrossMethod/Shapes/SemiCircle.tscn")
+
 
 @export var gradient: Gradient = Gradient.new()
 @export var distinction_color: Color = Color.RED
 @export var ordinary_color: Color = Color.BLUE
 @export var disk_shape_index: int = 0
 
+
 func _ready() -> void:
 	disk_shape_index = $CanvasLayer/ShapeCrossMethodInterface.get_disk_pos()
 	update_shapes()
+
 
 func _on_shape_type_changed() -> void:
 	for shape in $Shapes.get_children():
@@ -21,8 +25,10 @@ func _on_shape_type_changed() -> void:
 
 	update_shapes()
 
+
 func _on_num_shapes_changed() -> void:
 	update_shapes()
+
 
 func _on_shape_trans_changed() -> void:
 	var trans = $CanvasLayer/ShapeCrossMethodInterface.get_shape_trans()
@@ -31,10 +37,12 @@ func _on_shape_trans_changed() -> void:
 		if shape != disk:
 			shape.set_alpha(1. - trans)
 
+
 func _on_disk_trans_changed() -> void:
 	var trans = $CanvasLayer/ShapeCrossMethodInterface.get_disk_trans()
 	var disk = get_disk()
 	disk.set_alpha(1. - trans)
+
 
 func _on_disk_pos_changed() -> void:
 	var num_shapes = $CanvasLayer/ShapeCrossMethodInterface.get_num_shapes()
@@ -57,16 +65,20 @@ func _on_disk_pos_changed() -> void:
 	
 	disk_shape_index = new_disk_index
 
+
 func _on_coloring_changed() -> void:
 	match $CanvasLayer/ShapeCrossMethodInterface.get_coloring():
 		0: color_shapes_by_gradient()
 		1: color_shapes_by_distinction()
 
+
 func _on_domain_changed() -> void:
 	update_shapes()
 
+
 func _on_function_changed() -> void:
 	update_shapes()
+
 
 func update_shapes() -> void:
 	var shape_scene = get_shape_scene()
@@ -107,11 +119,13 @@ func update_shapes() -> void:
 	if coloring == 1:
 		disk.set_color(distinction_color)
 
+
 func get_disk() -> Node3D:
 	var num_shapes = $CanvasLayer/ShapeCrossMethodInterface.get_num_shapes()
 	var disk_pos = $CanvasLayer/ShapeCrossMethodInterface.get_disk_pos()
 	disk_shape_index = disk_pos * (num_shapes - 1)
 	return $Shapes.get_child(disk_shape_index)
+
 
 func color_shapes_by_gradient() -> void:
 	var num_shapes = $Shapes.get_child_count()
@@ -119,6 +133,7 @@ func color_shapes_by_gradient() -> void:
 		$Shapes.get_child(i).set_color(
 			gradient.sample(i as float / num_shapes)
 		)
+
 
 func color_shapes_by_distinction() -> void:
 	var num_shapes = $Shapes.get_child_count()
@@ -128,10 +143,11 @@ func color_shapes_by_distinction() -> void:
 		var color = distinction_color if shape == disk else ordinary_color
 		shape.set_color(color)
 
+
 func get_shape_scene() -> PackedScene:
 	match $CanvasLayer/ShapeCrossMethodInterface.get_shape_type():
 		0: return square_scene
 		1: return equilateral_triangle_scene
 		2: return isosceles_right_triangle_scene
 		3: return semi_circle_scene
-		_: return square_scene
+		_: return null
