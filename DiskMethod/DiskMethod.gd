@@ -50,11 +50,15 @@ func _on_interface_function_changed() -> void:
 
 func _on_interface_disk_pos_changed() -> void:
 	var num_rects = $CanvasLayer/Interface.get_num_rect()
+	var new_disk_index: int = $CanvasLayer/Interface.get_disk_pos() * (num_rects - 1)
+	# if disk position didn't change, don't do anything
+	if new_disk_index == disk_rect_index:
+		return
+
 	var shape_trans = $CanvasLayer/Interface.get_shape_trans()
 	var disk_trans = $CanvasLayer/Interface.get_disk_trans()
 	var shape_rotation = $CanvasLayer/Interface.get_shape_rotation()
 	var disk_rotation = $CanvasLayer/Interface.get_disk_rotation()
-	var new_disk_index = $CanvasLayer/Interface.get_disk_pos() * (num_rects - 1)
 	var old_disk = $Rectangles.get_child(disk_rect_index)
 	var new_disk = $Rectangles.get_child(new_disk_index)
 
@@ -82,13 +86,14 @@ func update_rects() -> void:
 	var shape_trans = $CanvasLayer/Interface.get_shape_trans()
 	var delta_x = (domain_max - domain_min) / (num_rects as float)
 
-	for i in num_rects:
-		# Evaluate function as needed.
+	# Iterate over all rectangles
+	for i in range(num_rects):
+		# Find x and evaluate functions
 		var x = domain_min + i * delta_x
 		var lower_y = lower_function.execute([x])
 		var higher_y = higher_function.execute([x])
 
-		# Set rectangle position and color
+		# Set rectangle size, position, transparency, rotation, and color
 		var rect = $Rectangles.get_child(i) if i < $Rectangles.get_child_count() else rectangle_scene.instantiate()
 		rect.set_size(Vector3(delta_x, higher_y - lower_y, 0.01))
 		rect.set_pos(Vector3(x + delta_x / 2, (higher_y + lower_y) / 2, 0))
@@ -99,15 +104,15 @@ func update_rects() -> void:
 		else:
 			rect.set_color(ordinary_color)
 
-		# TODO: there may be performance issues here, need to optimize
+		# If we just instantiated a new rectangle, add it to the scene!
 		if i >= $Rectangles.get_child_count():
 			$Rectangles.add_child(rect)
 	
-	# Remove extra rectangles
+	# Remove extra rectangles if the user decreased the number of rectangles
 	for i in range(num_rects, $Rectangles.get_child_count()):
 		$Rectangles.get_child(i).queue_free()
 	
-	# Set disk properties
+	# Set disk rotation, transparency, and color individually
 	var disk = get_disk()
 	disk.set_rot(disk_rotation)
 	disk.set_alpha(1. - disk_trans)

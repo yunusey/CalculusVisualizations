@@ -8,8 +8,10 @@ extends Node3D
 @export var gradient: Gradient = Gradient.new()
 @export var distinction_color: Color = Color.RED
 @export var ordinary_color: Color = Color.BLUE
+@export var disk_shape_index: int = 0
 
 func _ready() -> void:
+	disk_shape_index = $CanvasLayer/ShapeCrossMethodInterface.get_disk_pos()
 	update_shapes()
 
 func _on_shape_type_changed() -> void:
@@ -35,7 +37,25 @@ func _on_disk_trans_changed() -> void:
 	disk.set_alpha(1. - trans)
 
 func _on_disk_pos_changed() -> void:
-	update_shapes()
+	var num_shapes = $CanvasLayer/ShapeCrossMethodInterface.get_num_shapes()
+	var new_disk_index: int = $CanvasLayer/ShapeCrossMethodInterface.get_disk_pos() * (num_shapes - 1)
+	# if disk position didn't change, don't do anything
+	if new_disk_index == disk_shape_index:
+		return
+
+	var shape_trans = $CanvasLayer/ShapeCrossMethodInterface.get_shape_trans()
+	var disk_trans = $CanvasLayer/ShapeCrossMethodInterface.get_disk_trans()
+	var old_disk = $Shapes.get_child(disk_shape_index)
+	var new_disk = $Shapes.get_child(new_disk_index)
+
+	old_disk.set_alpha(1. - shape_trans)
+	new_disk.set_alpha(1. - disk_trans)
+
+	if $CanvasLayer/ShapeCrossMethodInterface.get_coloring() == 1:
+		old_disk.set_color(ordinary_color)
+		new_disk.set_color(distinction_color)
+	
+	disk_shape_index = new_disk_index
 
 func _on_coloring_changed() -> void:
 	match $CanvasLayer/ShapeCrossMethodInterface.get_coloring():
@@ -59,7 +79,7 @@ func update_shapes() -> void:
 	var domain_max = $CanvasLayer/ShapeCrossMethodInterface.get_domain_max()
 	var delta_x = (domain_max - domain_min) / (num_shapes as float)
 	
-	for i in num_shapes:
+	for i in range(num_shapes):
 		var x = domain_min + i * delta_x
 		var y = function.execute([x])
 		var shape = $Shapes.get_child(i) if i < $Shapes.get_child_count() else shape_scene.instantiate()
@@ -90,7 +110,7 @@ func update_shapes() -> void:
 func get_disk() -> Node3D:
 	var num_shapes = $CanvasLayer/ShapeCrossMethodInterface.get_num_shapes()
 	var disk_pos = $CanvasLayer/ShapeCrossMethodInterface.get_disk_pos()
-	var disk_shape_index = disk_pos * (num_shapes - 1)
+	disk_shape_index = disk_pos * (num_shapes - 1)
 	return $Shapes.get_child(disk_shape_index)
 
 func color_shapes_by_gradient() -> void:
