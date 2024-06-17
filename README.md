@@ -6,11 +6,11 @@ _[Calculus Visualizations](https://github.com/yunusey/CalculusVisualizations) is
 Probably you are wondering why the project is named something as awkward as **Calculus Visualizations**. Well, I want to remind you one of my favorite quotes:
 
 > There are only two hard things in Computer Science: cache invalidation and naming things.
-> - Phil Karlton
+> ~ Phil Karlton
 
 Yeah, I couldn't think of a better name...
 ## Why?
-I love [Godot](https://godotengine.com). I needed to create a project that needed to visualize AP Calculus BC concepts for future students at my high school, so I did this!
+I love [Godot](https://godotengine.org). I needed to create a project that needed to visualize AP Calculus BC concepts for future students at my high school, so I did this!
 
 ## Installation
 You can check the web version of the tool [here](https://calculus-visualizations.netlify.app/). There is nothing added in the desktop version, but of course, it will work faster locally. I didn't set up GitHub Actions for building the project for desktop, but you can easily open the project locally in Godot following these instructions:
