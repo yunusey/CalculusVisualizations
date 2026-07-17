@@ -1,10 +1,6 @@
-# https://github.com/abarichello/godot-ci
-# https://github.com/abarichello/godot-ci/issues/123
-# https://github.com/abarichello/godot-ci/pull/113
-#
-# Thanks to MikulasZelinka for making this file!
+# Reproducible Godot 4.3 exports via Nix (see flake.nix / flake.lock).
+name: Build
 
-name: Godot Export
 on:
   push:
     branches:
@@ -12,48 +8,95 @@ on:
     paths-ignore:
       - "README.md"
       - ".gitattributes"
-      - ".gitignore"
+      - "LICENSE"
+  pull_request:
+  workflow_dispatch:
 
-env:
-  GODOT_VERSION: 4.2.1
+concurrency:
+  group: build-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  export-web:
-    name: Web Export
-    runs-on: ubuntu-20.04
-    container:
-      # TODO: how to interpolate the env var here?
-      # image: barichello/godot-ci:${GODOT_VERSION}
-      image: barichello/godot-ci:4.2.1
+  web:
+    name: Web (WASM)
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
     steps:
-      - name: 🛎️ Checkout
+      - name: Checkout
         uses: actions/checkout@v4
-      #   with:
-      #     lfs: true
-      - name: 🏹 Setup
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v22
+
+      - name: Enable Nix cache
+        uses: DeterminateSystems/magic-nix-cache-action@v13
+
+      - name: Build web export
         run: |
-          mkdir -v -p ~/.local/share/godot/export_templates
-          mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
-          cd ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
-          ls -l
-      - name: 🔧 Web Build
-        run: |
-          mkdir -v -p build/web
-          godot --headless --verbose --export-release "Web" ./build/web/index.html
-          ls -lah build/web
-      - name: 🤕 Netlify headers
-        # https://github.com/godotengine/godot/issues/69020
-        # https://github.com/godotengine/godot/blob/master/platform/web/serve.py
-        # https://docs.netlify.com/routing/headers/
-        run: |
-          cat <<EOF > build/web/_headers
-          /*
-            Cross-Origin-Opener-Policy: same-origin
-            Cross-Origin-Embedder-Policy: require-corp
-            Access-Control-Allow-Origin: *
-          EOF
-          cat build/web/_headers
-      - name: 🚀 Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4.4.3
+          nix build .#web -L -o artifacts-web
+          ls -lah artifacts-web
+
+      - name: Upload web artifact
+        uses: actions/upload-artifact@v4
         with:
-          folder: build/web
+          name: calculus-visualizations-web
+          path: artifacts-web/
+          if-no-files-found: error
+
+      - name: Prepare GitHub Pages bundle
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: |
+          mkdir -p _site
+          cp -a artifacts-web/. _site/
+
+      - name: Upload Pages artifact
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  linux:
+    name: Linux
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v22
+
+      - name: Enable Nix cache
+        uses: DeterminateSystems/magic-nix-cache-action@v13
+
+      - name: Build Linux export
+        run: |
+          nix build .#linux-portable -L -o artifacts-linux
+          ls -lah artifacts-linux
+
+      - name: Upload Linux artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: calculus-visualizations-linux-x86_64
+          path: artifacts-linux/
+          if-no-files-found: error
+
+  deploy:
+    name: Deploy GitHub Pages
+    needs: web
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
