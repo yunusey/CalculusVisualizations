@@ -136,7 +136,8 @@
           install = ''
             mkdir -p "$out"
             cp -a build/web/. "$out/"
-            # COOP/COEP headers for Netlify / local serve.py.
+            # COOP/COEP headers for hosts that honor them (e.g. Cloudflare/Netlify Pages).
+            # GitHub Pages ignores this file, which is fine since the build does not require them.
             cp ${webHeaders} "$out/_headers"
           '';
         };
