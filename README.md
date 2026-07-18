@@ -1,43 +1,54 @@
 # Calculus Visualizations
 
-_[Calculus Visualizations](https://github.com/yunusey/CalculusVisualizations) is a tool for visualizing calculus concepts such as solids of revolution and solids of cross sections._
+[Calculus Visualizations](https://github.com/yunusey/CalculusVisualizations) is a tool for visualizing calculus concepts such as solids of revolution and solids of cross sections.
 
-## Before Beginning
-Probably you are wondering why the project is named something as awkward as **Calculus Visualizations**. Well, I want to remind you one of my favorite quotes:
+## Overview
 
-> There are only two hard things in Computer Science: cache invalidation and naming things.
-> ~ Phil Karlton
+The project is built with Godot 4.3. It ships two interactive 3D scenes: the disk/washer method for solids of revolution, and solids with known cross sections. Functions are entered as [Godot expressions](https://docs.godotengine.org/en/stable/tutorials/scripting/evaluating_expressions.html) and evaluated at runtime, so the geometry updates live as you change parameters.
 
-Yeah, I couldn't think of a better name...
-## Why?
-I love [Godot](https://godotengine.org). I needed to create a project that needed to visualize AP Calculus BC concepts for future students at my high school, so I did this!
+The Web build runs on the Compatibility (WebGL2) renderer, since that is the only renderer available for Godot web exports.
 
-## Installation
-You can check the web version of the tool [here](https://calculus-visualizations.netlify.app/). There is nothing added in the desktop version, but of course, it will work faster locally. I didn't set up GitHub Actions for building the project for desktop, but you can easily open the project locally in Godot following these instructions:
+## Web Version
 
-1. Clone the repository or [download the project as ZIP](https://github.com/yunusey/CalculusVisualizations/archive/refs/heads/main.zip) if you don't know how to use GitHub.
+The tool runs in the browser at [yunusey.github.io/CalculusVisualizations](https://yunusey.github.io/CalculusVisualizations/). The desktop build behaves identically and runs faster locally.
+
+## Building
+
+Builds are reproducible through Nix (see [flake.nix](flake.nix)):
+
+- `nix build .#web` produces the WebAssembly/HTML export.
+- `nix build .#linux` and `nix build .#linux-portable` produce Linux binaries (the portable variant keeps the upstream dynamic linker for generic distros).
+- `nix run` launches the Linux build.
+- `nix develop` opens a shell with Godot and the export templates already wired up.
+
+Without Nix, clone the repository and open it in Godot 4.3:
+
 ```bash
 git clone https://github.com/yunusey/CalculusVisualizations.git
 ```
-2. Import the project to Godot.
+
+## Continuous Integration
+
+[.github/workflows/godot-ci.yml](.github/workflows/godot-ci.yml) builds the Web and Linux exports with Nix on every push to `main` and deploys the Web build to GitHub Pages. It uses DeterminateSystems' `nix-installer-action` and `magic-nix-cache-action`, `actions/upload-artifact` for the build outputs, and `actions/upload-pages-artifact` with `actions/deploy-pages` for publishing.
 
 ## User Guide
 
-* To move around, you should use `WASD` keys. The camera always rotates *around the origin*.
+* To move around, use the `WASD` keys. The camera always rotates *around the origin*.
 
-* To zoom in and out, you should use `Mouse Wheel Up` and `Mouse Wheel Down`. The value gets clamped down when you zoom in too much or zoom out too much (again, so that you don't lose track).
+* To zoom in and out, use `Mouse Wheel Up` and `Mouse Wheel Down`. The value is clamped when you zoom in or out too far, so you do not lose track.
 
-* If the menu takes too much space and you want to get rid of that, you can use `H` key to toggle the menu.
+* Press `H` to toggle the menu if it takes up too much space.
 
-* To toggle full-screen mode, you should use `F` key.
+* Press `F` to toggle full-screen mode.
 
-* When you are entering equations, the standard mathematical format may not work as intended (e.g. `x^2` doesn't work). You should use [Godot's expressions](https://docs.godotengine.org/en/stable/tutorials/scripting/evaluating_expressions.html). Here are several examples you may want to consider:
+* Equations use [Godot expressions](https://docs.godotengine.org/en/stable/tutorials/scripting/evaluating_expressions.html), not standard mathematical notation (for example, `x^2` does not work). Some examples:
     - $x^2$ = `x * x` = `pow(x, 2)`
     - $ln(x)$ = `log(x)`
     - $\sqrt{x}$ = `sqrt(x)`
     - $3x$ = `3 * x`
 
 ## Parameters
+
 ### Disk & Washer Method
 - **# Rectangles**: Changes the number of rectangles for a more or less precise version of the shape.
 - **Shape Rot.**: Changes the rotation of the *entire shape*.
@@ -60,6 +71,4 @@ git clone https://github.com/yunusey/CalculusVisualizations.git
 
 ## References & Thanks
 - [Godot Game Engine](https://godotengine.org) for *everything*.
-- [MikulasZelinka's Godot Web Export Template](https://github.com/MikulasZelinka/godot-web-export-template) for automatic web builds.
-- [Netlify](https://www.netlify.com/) for free hosting.
-
+- [DeterminateSystems' nix-installer-action](https://github.com/DeterminateSystems/nix-installer-action) for installing Nix in CI.
