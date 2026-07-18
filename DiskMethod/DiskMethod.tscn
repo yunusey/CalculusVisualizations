@@ -19,7 +19,6 @@ sky_material = SubResource("ProceduralSkyMaterial_6uupr")
 background_color = Color(0.0941176, 0.0980392, 0.14902, 1)
 sky = SubResource("Sky_tqfoh")
 tonemap_mode = 2
-glow_enabled = true
 
 [node name="DiskMethod" type="Node3D"]
 script = ExtResource("1_7p7it")
